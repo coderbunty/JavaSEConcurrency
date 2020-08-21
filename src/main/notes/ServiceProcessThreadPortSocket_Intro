@@ -1,0 +1,79 @@
+Service is a process or a group of processes, which runs continuously in the background, waiting to be used, or carrying
+out essential operations.
+For example, mysql, apache server, cron job scheduler, system logger, openstack services like nova-api, keystone etc.
+(All services are processes (one or several), a process is not necessarily a "service")
+# service <service_name> start/stop/restart/status      // for init services
+# systemctl start/stop/restart/status <service_name>    // for systemd services
+
+Process is a program in execution or an instance of a particular executable running.
+It has at least one main thread which starts the execution. Apart from the main thread, it can have several other threads.
+As it is a program in execution, it is stored in main memory.
+A process has a virtual address space, executable code, open handles to system objects, a security context, a unique
+process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one
+thread of execution. Each process is started with a single thread, often called the primary thread, but can create
+additional threads from any of its threads.
+
+Linux process status command is 'ps'.
+# ps -ef        // e->all running processes, f->details in full format
+# ps aux        // print all the running processes in the system regardless of from where they have been executed
+
+
+Threads are the smallest unit of execution in a process.
+A thread is the entity within a process that can be scheduled for execution. All threads of a process share its virtual
+address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread
+local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until
+it is scheduled.
+
+------------------------------------------------------------------------------------------------------------------------
+When one application from a system wants to communicate with another application on another system, a TCP connection is
+established. Now for this connection to happen, the client system should know the server system's address (its ip) and
+the port number where this application with which it wants to connect, is running. This ip+port# is also known as an
+endpoint. A TCP connection has 2 endpoints (client endpoint & server endpoint).
+
+The purpose of ports is to differentiate multiple endpoints on a given network address.
+
+On one specific endpoint, there can be multiple connections getting originated or terminated i.e., it can create or
+serve multiple requests. For each connection, socket is the endpoint. => socket is the endpoint of a specific connection.
+
+   | It is the socket pair (the 4-tuple consisting of the client IP address, client port number, server IP address, and
+   | server port number) that specifies the two endpoints that uniquely identifies each TCP connection in an internet.
+   | (TCP-IP Illustrated Volume 1, W. Richard Stevens)
+
+------------------------------------------------------------------------------------------------------------------------
+A port is a logical construct assigned to network processes so that they can be identified within the system.
+A port is a virtual identifier defining a service endpoint (as distinct from a service instance endpoint aka session identifier).
+Port numbers range from 0 to 65535.
+Some well known port numbers are 22->SSH, 23->telnet, 25->SMTP, 80->HTTP, 443->HTTPS.
+Well known ports range from 0 to 1023.
+Registered ports range from 1023 to 49151.
+Dynamic or private ports range from 49152 to 65535.
+
+A TCP socket is an endpoint INSTANCE defined by an IP address and a port in the context of either a particular TCP connection
+or the listening state.
+A TCP socket is not a connection, it is the endpoint of a specific connection.
+
+There can be concurrent connections to a service endpoint, because a connection is identified by both its local and remote
+endpoints, allowing traffic to be routed to a specific service instance.
+
+------------------------------------------------------------------------------------------------------------------------
+'netstat' is a command-line network utility that displays TCP network connections, routing tables, and a number of
+network interface and network protocol statistics.
+# netstat -a    // displays all connections & listening ports
+# netstat -at   // displays all tcp connections
+# netstat -au   // displays all udp connections
+# netstat -lt   // displays all active listening TCP ports
+
+------------------------------------------------------------------------------------------------------------------------
+The WebSocket is an advanced technology that makes it possible to open a two-way interactive communication session
+between the user's browser and a server. With this API, you can send messages to a server and receive event-driven
+responses without having to poll the server for a reply.
+
+WebSocket is a computer communications protocol, providing full-duplex communication channels over a single TCP connection.
+
+The WebSocket protocol enables interaction between a web browser (or other client application) and a web server with lower
+overhead than half-duplex alternatives such as HTTP polling, facilitating real-time data transfer from and to the server.
+This is made possible by providing a standardized way for the server to send content to the client without being first
+requested by the client, and allowing messages to be passed back and forth while keeping the connection open. In this way,
+a two-way ongoing conversation can take place between the client and the server. The communications are usually done over
+TCP port number 443 (or 80 in the case of unsecured connections)
+https://en.wikipedia.org/wiki/WebSocket

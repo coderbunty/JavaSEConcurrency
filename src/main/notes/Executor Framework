@@ -1,0 +1,94 @@
+The Java platform is designed from the ground up to support concurrent programming, with basic concurrency support in the
+Java programming language and the Java class libraries. Since version 5.0, the Java platform has also included high-level
+concurrency APIs. Here we will summarize some of the high-level APIs in the java.util.concurrent packages.
+
+Features of Executor framework,
+- decouples the thread creation & management from the application business logic.
+- smooth coordination between the thread submitting the task and the threads executing the job.
+- clean shutdown of all tasks
+- helps check the output of completed tasks (Callable & Future)
+- helps schedule threads at regular intervals
+- spawns threads through the creation of thread pools
+
+The java.util.concurrent package defines three executor interfaces:
+
+    * Executor, a simple interface that supports launching new tasks.
+    * ExecutorService, a sub-interface of Executor, which adds features that help manage the lifecycle, both of the
+      individual tasks and of the executor itself.
+    * ScheduledExecutorService, a sub-interface of ExecutorService, supports future and/or periodic execution of tasks.
+
+ScheduledExecutorService extends ExecutorService extends Executor
+
+------------------------------------------------------------------------------------------------------------------------
+Executor interface
+
+It provides a single method, execute, designed to be a drop-in replacement for a common thread-creation idiom. If r is a
+Runnable object, and e is an Executor object you can replace,
+        (new Thread(r)).start();    with    e.execute(r);
+
+However, the definition of execute is less specific. The low-level idiom creates a new thread and launches it immediately.
+Depending on the Executor implementation, execute may do the same thing, but is more likely to use an existing worker thread
+to run r, or to place r in a queue to wait for a worker thread to become available.
+
+Executor executor = Executors.newSingleThreadExecutor();
+executor.execute(() -> System.out.println("Hello World.."))
+
+execute() can only take Runnable object as parameter.
+------------------------------------------------------------------------------------------------------------------------
+ExecutorService interface
+
+This interface supplements execute with a similar, but more versatile submit method. Like execute, submit accepts Runnable
+objects, but also accepts Callable objects, which allow the task to return a value. The submit method returns a Future
+object, which is used to retrieve the Callable return value and to manage the status of both Callable and Runnable tasks.
+
+ExecutorService also provides methods for submitting large collections of Callable objects. Finally, ExecutorService
+provides a number of methods for managing the shutdown of the executor. To support immediate shutdown, tasks should handle
+interrupts correctly.
+
+ExecutorService execService = Executors.newFixedThreadPool(5);
+execService.execute(() -> System.out.println("Hello World.."))       // can only take Runnable object as parameter
+execService.submit(() -> System.out.println("Hello World.."))        // can take Callable or Runnable as parameter
+
+invokeAny() - submits a collection of tasks & returns output of first successful/exception task execution.
+invokeAll() - submits a collection of tasks & returns output of all tasks
+
+------------------------------------------------------------------------------------------------------------------------
+ScheduledExecutorService interface
+
+This  interface supplements the methods of its parent ExecutorService with schedule, which executes a Runnable or Callable
+task after a specified delay. In addition, the interface defines scheduleAtFixedRate and scheduleWithFixedDelay, which
+executes specified tasks repeatedly, at defined intervals.
+
+ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+service.schedule(() -> System.out.println("Hello World.."), 5, TimeUnit.Seconds)      // can take Callable or Runnable as
+                                                                                         parameter, run after 5 seconds
+
+------------------------------------------------------------------------------------------------------------------------
+
+Executor API uses the default ThreadFactory to create threads for the application. Default ThreadFactory implementation
+will create threads, all of which are in the same thread group, all with the same thread priority of 5, a non-daemon
+status, and default names (pool-1-thread-1 etc).
+We can always create a custom ThreadFactory and pass it to the Executors.newFixedThreadPool() as a parameter so that the
+threads in the pool are then created using our ThreadFactory implementation. In our custom ThreadFactory implementation,
+we can modify default settings which the default ThreadFactory uses.
+
+public class CustomThreadFactory implements ThreadFactory{
+
+    private static int counter=0;
+
+    @Override
+    public Thread newThread(Runnable r) {
+
+        Thread thread = new Thread(r);
+        thread.setName("Custom Thread - "+(++counter));
+        return thread;
+    }
+
+}
+
+ExecutorService execService = Executors.newFixedThreadPool(5, new CustomThreadFactory());
+
+(https://docs.oracle.com/javase/tutorial/essential/concurrency/exinter.html)
+
+
+

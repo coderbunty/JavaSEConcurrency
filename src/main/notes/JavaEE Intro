@@ -1,0 +1,88 @@
+
+Introduction to Java EE
+
+Developers today increasingly recognize the need for distributed, transactional, and portable applications that leverage
+the speed, security, and reliability of server-side technology. Enterprise applications provide the business logic for an
+enterprise. They are centrally managed and often interact with other enterprise software. In the world of information
+technology, enterprise applications must be designed, built, and produced for less money, with greater speed, and with
+fewer resources.
+
+With the Java Platform, Enterprise Edition (Java EE), development of Java enterprise applications has never been easier
+or faster. The aim of the Java EE platform is to provide developers with a powerful set of APIs while shortening development
+time, reducing application complexity, and improving application performance.
+
+The Java EE platform is developed through the Java Community Process (JCP), which is responsible for all Java technologies.
+Expert groups composed of interested parties have created Java Specification Requests (JSRs) to define the various Java EE
+technologies. The work of the Java Community under the JCP program helps to ensure Java technology’s standards of stability
+and cross-platform compatibility.
+
+The Java EE platform uses a simplified programming model. XML deployment descriptors are optional. Instead, a developer
+can simply enter the information as an annotation directly into a Java source file, and the Java EE server will configure
+the component at deployment and runtime. These annotations are generally used to embed in a program data that would otherwise
+be furnished in a deployment descriptor. With annotations, you put the specification information in your code next to the
+program element affected.
+
+In the Java EE platform, dependency injection can be applied to all resources a component needs, effectively hiding the
+creation and lookup of resources from application code. Dependency injection can be used in Enterprise JavaBeans (EJB)
+containers, web containers, and application clients. Dependency injection allows the Java EE container to automatically
+insert references to other required components or resources, using annotations.
+
+This tutorial uses examples to describe the features available in the Java EE platform for developing enterprise applications.
+Whether you are a new or experienced enterprise developer, you should find the examples and accompanying text a valuable
+and accessible knowledge base for creating your own solutions.
+https://javaee.github.io/tutorial/toc.html
+
+------------------------------------------------------------------------------------------------------------------------
+
+Java SE = Standard Edition. This is the core Java programming platform. It contains all of the libraries and APIs that
+any Java programmer should learn (java.lang, java.io, java.math, java.net, java.util, etc...).
+
+Java EE = Enterprise Edition. It differs from the Java Standard Edition Platform (Java SE) in that it adds libraries which
+provide functionality to deploy fault-tolerant, distributed, multi-tier Java software, based largely on modular components
+running on an application server.
+In other words, if your application demands a very large scale, distributed system, then you should consider using Java EE.
+Built on top of Java SE, it provides libraries for database access (JDBC, JPA), remote method invocation (RMI), messaging (JMS),
+web services, XML processing, and defines standard APIs for Enterprise JavaBeans, servlets, portlets, Java Server Pages, etc..
+
+Java ME = Micro Edition. This is the platform for developing applications for mobile devices and embedded systems such as
+set-top boxes. Java ME provides a subset of the functionality of Java SE, but also introduces libraries specific to mobile
+devices.
+
+Here are some differences in terms of APIs
+
+Java SE includes has the following APIs and many more
+
+    applet
+    awt
+    rmi
+    jdbc
+    swing
+    collections
+    xml binding
+    JavaFX (Merged to Java SE 8)
+    Java 8 Collections Streaming API
+    Java 9 Reactive Streams API
+    Java 9 HTTP/2 API
+
+Java EE includes the following APIs and many more
+
+    servlet
+    websocket
+    java server faces
+    dependency injection
+    ejb
+    persistence
+    transaction
+    jms
+    batch api
+
+Java ME includes the following APIs and many more
+
+    Wireless Messaging
+    Java ME Web Services
+    Security and Trust Services API
+    Location
+    Mobile XML API
+
+
+

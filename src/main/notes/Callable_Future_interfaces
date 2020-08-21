@@ -1,0 +1,10 @@
+The job of the thread is always defined under the run() of Runnable/Thread API.
+run() takes no parameters & returns no values.
+
+But if we want the thread/task to return some value after its execution is over, then we use Callable interface.
+call() returns a generic value <V> defined in Callable<V>.
+call() can throw checked exceptions, run() of Runnable cannot throw exceptions.
+
+Returned value from Callable can be captured in a Future object.
+
+Executor framework works with both Runnable & Callable interfaces.

@@ -1,0 +1,75 @@
+Concurrency is when two or more tasks (threads) can start, run, and complete in overlapping time periods, instead of
+sequentially. It doesn't necessarily mean they'll ever both be running at the same instant. For example, multitasking on
+a single-core machine. (concurrent meaning simultaneous)
+
+Concurrency is the ability of your program to DEAL (not doing) with many things at once and is achieved through multithreading.
+(Scheduling & context switching enable CPU time to be shared across all running threads/processes and is key for Concurrency.)
+Do not confuse concurrency with parallelism which is about DOING many things at once.
+
+Parallelism is when tasks (threads/processes) literally run at the same time, e.g., on a multicore processor.
+Large problems can often be divided into smaller ones, which can then be solved at the same time by running the different
+smaller problems as threads on different cores.
+
+One way to think would be,
+Concurrency - interruptibility
+Parallelism - independentibility
+
+(Consider a scenario where we have 3 threads doing some task & we have a CPU with only one core. Here concurrency comes
+into play as all the 3 threads are in execution at the same time, but at any point of time, only one thread has access
+to the CPU core. If we had a quad core CPU (4 cores), then all 3 threads could run at on different cores at the same time,
+this is parallelism.)
+
+Parallel computing is closely related to concurrent computing — they are frequently used together, and often conflated,
+though the two are distinct: it is possible to have parallelism without concurrency (truly independent tasks, no sharing),
+and concurrency without parallelism (such as multitasking by time-sharing on a single-core CPU).
+In parallel computing, a computational task is typically broken down into several, often many, very similar sub-tasks that
+can be processed independently and whose results are combined afterwards, upon completion.
+In contrast, in concurrent computing, the various tasks are dealt with at the same time, these tasks may have shared resources
+and/or require coordination. In Java, there are tools to deal with coordination between tasks/threads,
+locks, synchronized, concurrent data structures, atomic classes etc.
+
+------------------------------------------------------------------------------------------------------------------------
+Parallelism can also be, sort of, achieved on a process which spawns multiple threads.
+In a multithreaded process on a single processor, the processor can switch execution resources between threads,
+resulting in concurrent execution.
+In the same multithreaded process in a shared-memory multiprocessor environment, each thread in the process can run on a
+separate processor at the same time, resulting in parallel execution.
+When the process has fewer or as many threads as there are processors, the threads support system in conjunction with the
+operating environment ensure that each thread runs on a different processor.
+For example, in a matrix multiplication that has the same number of threads and processors, each thread (and each processor)
+computes a row of the result.
+------------------------------------------------------------------------------------------------------------------------
+The operating system offers time slices of CPU to threads that are eligible to run.
+If there is only one core, then the operating system schedules the most eligible thread to run on that core for a time slice.
+After a time slice is completed, or when the running thread blocks on IO, or when the processor is interrupted by external
+events, the operating system reevaluates what thread to run next (and it could choose the same thread again or a different one).
+Eligibility to run consists of variations on fairness and priority and readiness, and by this method various threads get
+time slices, some more than others.
+
+If there are multiple cores, N, then the operating system schedules the most eligible N threads to run on the cores.
+Processor Affinity is an efficiency consideration. Each time a CPU runs a different thread than before, it tends to slow
+down a bit because its cache is warm for the previous thread, but cold to the new one. Thus, running the same thread on
+the same processor over numerous time slices is an efficiency advantage.
+
+However, the operating system is free to offer one thread time-slices on different CPUs, and it could rotate through all
+the CPUs on different time slices.
+------------------------------------------------------------------------------------------------------------------------
+A single process's multiple threads can be run on different cores.
+
+Caching is specific to the hardware. Many modern Intel processors have three layers of caching, where the last level cache
+is shared across cores. It does not mean the non-shared caches are redundant, but it does have implications for multicore
+performance. In particular, if one core updates a value in the address space that currently lives in another core's private
+cache, then a cache coherence protocol must be run to ensure that another core can no longer read a stale value.
+------------------------------------------------------------------------------------------------------------------------
+A conventional operating system (OS), for instance Linux, manages the execution of a number of processes (processes
+essentially correspond to programs).
+
+A process initially executes on one thread, but can create additional threads as it executes. One of the main tasks of an
+OS is to manage the execution of all the process threads.
+    - When there is just one processor, the OS scheduler context switches between different threads to provide concurrent execution.
+    - When there are multiple processors, each processor essentially runs an instance of the OS scheduler, thereby executing
+      threads that are waiting to be run. The result is parallel execution of the set of threads to be executed.
+
+The behavior of concurrency or threading in a language depends on how it is implemented.
+With Java, implementations of the JVM will most likely use threading mechanism provided by the OS, i.e. POSIX (see this question).
+The performance of a multithreaded Java program will therefore be determined by the OS.

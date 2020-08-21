@@ -1,0 +1,20 @@
+Java EE APIs
+
+The following technologies & APIs are required by the Java EE platform & applications.
+
+- Enterprise Java Beans (EJB)
+- Java Servlets
+- Java Server Faces (JSF)
+- Java Server Pages (JSP)
+- JavaServerPages Standard Tag Library (JSTL)
+- Java Persistence API (JPA)
+- Java Transaction API (JTA)
+- Java API for RESTful Web Services (JAX-RS)
+- Java Messaging Service (JMS)
+- Contexts & Dependency Injection (CDI)
+- Bean Validation
+- JSON Binding API (JSON-B)
+- JSON Parsing API (JSON-P)
+- Java API for WebSocket
+- Concurrency utilities for Java EE
+- Java EE Security API
