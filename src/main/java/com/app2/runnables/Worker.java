@@ -1,15 +1,15 @@
 package com.app2.runnables;
 
-import com.app2.tasks.Task;
+import com.app2.tasks.AttackTask;
 
 import java.util.logging.Logger;
 
 public class Worker implements Runnable {
 
     private static final Logger LOG = Logger.getLogger(Worker.class.getName());
-    private final Task task;
+    private final AttackTask task;
 
-    public Worker (final Task task) {
+    public Worker (final AttackTask task) {
         this.task = task;
     }
 

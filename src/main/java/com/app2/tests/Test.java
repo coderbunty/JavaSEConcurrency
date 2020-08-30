@@ -3,7 +3,7 @@ package com.app2.tests;
 import com.app2.runnables.Worker;
 import com.app2.tasks.AirStrikeTask;
 import com.app2.tasks.LandStrikeTask;
-import com.app2.tasks.Task;
+import com.app2.tasks.AttackTask;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Test {
 
     public static void main(String[] args) {
         LOG.info("Attacking now..");
-        List<Task> tasks = Arrays.asList(
+        List<AttackTask> tasks = Arrays.asList(
             new AirStrikeTask(5),
             new LandStrikeTask(3),
             new LandStrikeTask(2),

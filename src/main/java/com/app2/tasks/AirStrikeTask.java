@@ -1,6 +1,6 @@
 package com.app2.tasks;
 
-public class AirStrikeTask extends Task {
+public class AirStrikeTask extends AttackTask {
 
     private static final int TIME_PER_STRIKE = 100;
 
