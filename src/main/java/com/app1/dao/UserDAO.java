@@ -1,6 +1,6 @@
-package com.app.dao;
+package com.app1.dao;
 
-import com.app.beans.User;
+import com.app1.beans.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

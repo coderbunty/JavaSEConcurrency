@@ -1,7 +1,7 @@
-package com.app.runnables;
+package com.app1.runnables;
 
-import com.app.beans.User;
-import com.app.dao.UserDAO;
+import com.app1.beans.User;
+import com.app1.dao.UserDAO;
 
 import java.util.StringTokenizer;
 import java.util.concurrent.Callable;

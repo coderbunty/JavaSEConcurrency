@@ -1,7 +1,7 @@
-package com.app.tests;
+package com.app1.tests;
 
-import com.app.dao.UserDAO;
-import com.app.runnables.UserProcessor;
+import com.app1.dao.UserDAO;
+import com.app1.runnables.UserProcessor;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,6 +1,5 @@
-package com.app.tests;
+package com.app1.tests;
 
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
