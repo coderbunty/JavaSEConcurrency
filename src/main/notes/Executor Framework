@@ -19,6 +19,8 @@ The java.util.concurrent package defines three executor interfaces:
 
 ScheduledExecutorService extends ExecutorService extends Executor
 
+(https://github.com/coderbunty/JavaSEConcurrency/blob/master/src/main/notes/ExecutorFramework.png)
+
 ------------------------------------------------------------------------------------------------------------------------
 Executor interface
 
@@ -62,6 +64,29 @@ executes specified tasks repeatedly, at defined intervals.
 ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
 service.schedule(() -> System.out.println("Hello World.."), 5, TimeUnit.Seconds)      // can take Callable or Runnable as
                                                                                          parameter, run after 5 seconds
+
+------------------------------------------------------------------------------------------------------------------------
+Implementations for Executor, ExecutorService
+
+1. ThreadPoolExecutor (extends AbstractExectorService which implments ExecutorService which extends Executor)
+
+   ThreadPoolExecutor(int corePoolSize,                        // number of threads to always be in the pool, even if they are idle
+                      int maximumPoolSize,                     // max number of threads to allow in the pool   
+                      long keepAliveTime,                      // max time the excess idle threads (when > corePoolSize) will wait for new tasks before terminating
+                      TimeUnit unit,                           // time unit for keepAliveTime
+                      BlockingQueue<Runnable> workQueue)       // blocking queue for holding tasks before they are executed
+
+   Executor e = new ThreadPoolExecutor(5, 8, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+   
+   ExecutorService es = new ThreadPoolExecutor(5, 8, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+
+2. Executors - provides Factory and utility methods for Executor, ExecutorService, ScheduledExecutorService, ThreadFactory, and Callable classes
+
+   Executor e1 = Executors.newFixedThreadPool(10);
+   ExecutorService e2 = Executors.newCachedThreadPool();
+   ExecutorService e3 = Executors.newFixedThreadPool(10, Executors.defaultThreadFactory());
+   ExecutorService e4 = Executors.newSingleThreadExecutor();
+   ScheduledExecutorService e5 = Executors.newScheduledThreadPool(10);
 
 ------------------------------------------------------------------------------------------------------------------------
 
